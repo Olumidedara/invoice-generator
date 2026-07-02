@@ -58,22 +58,6 @@
   </table>
 </div>
 
-## 🚀 Deploy Your Own
-
-Deploy to Vercel, Netlify, or any static host in seconds:
-
-```bash
-# Clone it
-git clone https://github.com/Olumidedara/invoice-generator.git
-cd invoice-generator
-
-# That's it. Open index.html or deploy.
-```
-
-Or just drag the folder to [vercel.com](https://vercel.com) — zero config required.
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FOlumidedara%2Finvoice-generator)
-
 ## 🛠️ Tech Stack
 
 ```
