@@ -13,10 +13,13 @@
 <body>
 
   <header class="app-header">
-    <h1>MyInvoice</h1>
+    <div class="header-left">
+      <div class="logo-mark">M</div>
+      <h1>MyInvoice <span class="header-sub">— Invoice Builder</span></h1>
+    </div>
     <div class="header-actions">
-      <button class="btn btn-secondary btn-sm" id="sampleBtn">Load Sample</button>
-      <button class="btn btn-secondary btn-sm" id="clearBtn">Clear</button>
+      <button class="btn btn-ghost btn-sm" id="sampleBtn"><span>📋</span> <span>Sample</span></button>
+      <button class="btn btn-ghost btn-sm" id="clearBtn"><span>🗑</span> <span>Clear</span></button>
     </div>
   </header>
 
@@ -24,8 +27,12 @@
 
     <!-- FORM -->
     <div class="form-side">
+
       <div class="form-section">
-        <h2>From <span class="badge">Your Company</span></h2>
+        <div class="form-section-header">
+          <div class="section-icon purple">🏢</div>
+          <h2>From <span class="badge">Your Company</span></h2>
+        </div>
         <div class="form-row">
           <div class="form-group">
             <label>Company Name</label>
@@ -49,7 +56,10 @@
       </div>
 
       <div class="form-section">
-        <h2>Bill To <span class="badge">Client</span></h2>
+        <div class="form-section-header">
+          <div class="section-icon green">👤</div>
+          <h2>Bill To <span class="badge">Client</span></h2>
+        </div>
         <div class="form-row">
           <div class="form-group">
             <label>Client Name</label>
@@ -73,7 +83,10 @@
       </div>
 
       <div class="form-section">
-        <h2>Invoice Details</h2>
+        <div class="form-section-header">
+          <div class="section-icon blue">📋</div>
+          <h2>Invoice Details</h2>
+        </div>
         <div class="form-row three-col">
           <div class="form-group">
             <label>Invoice Number</label>
@@ -90,16 +103,19 @@
         </div>
       </div>
 
-      <div class="form-section">
-        <h2>Items <span class="badge">Line Items</span></h2>
+      <div class="form-section items-section">
+        <div class="form-section-header">
+          <div class="section-icon amber">📦</div>
+          <h2>Items <span class="badge">Line Items</span></h2>
+        </div>
         <div class="items-table-wrapper">
           <table class="items-table">
             <thead>
               <tr>
-                <th style="width:45%">Description</th>
-                <th style="width:12%">Qty</th>
-                <th style="width:15%">Rate</th>
-                <th style="width:15%">Amount</th>
+                <th style="width:44%">Description</th>
+                <th style="width:13%">Qty</th>
+                <th style="width:16%">Rate</th>
+                <th style="width:16%">Amount</th>
                 <th style="width:30px"></th>
               </tr>
             </thead>
@@ -133,12 +149,15 @@
       </div>
 
       <div class="form-section">
-        <h2>Additional Info</h2>
+        <div class="form-section-header">
+          <div class="section-icon purple">📝</div>
+          <h2>Additional Info</h2>
+        </div>
         <div class="form-group">
           <label>Notes</label>
           <textarea id="notes" placeholder="Payment instructions, thank you notes, etc."></textarea>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="margin-top:12px">
           <label>Terms & Conditions</label>
           <textarea id="terms" placeholder="Payment terms, refund policy, etc."></textarea>
         </div>
@@ -151,10 +170,17 @@
 
     <!-- PREVIEW -->
     <div class="preview-section">
-      <div id="invoicePreview">
-        <div class="preview-empty">
-          <div class="icon">📄</div>
-          <p>Add items to your invoice to see a live preview here.</p>
+      <div class="preview-card">
+        <div class="preview-card-header">
+          <h3>Invoice Preview</h3>
+          <span class="preview-zoom-badge">Live</span>
+        </div>
+        <div id="invoicePreview">
+          <div class="preview-empty">
+            <div class="icon">📄</div>
+            <h3>No items yet</h3>
+            <p>Add line items to your invoice to see a live preview here.</p>
+          </div>
         </div>
       </div>
     </div>

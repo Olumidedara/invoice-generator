@@ -144,7 +144,8 @@ function updatePreview() {
     preview.innerHTML = `
       <div class="preview-empty">
         <div class="icon">📄</div>
-        <p>Add items to your invoice to see a live preview here.</p>
+        <h3>No items yet</h3>
+        <p>Add line items to your invoice to see a live preview here.</p>
       </div>
     `;
     return;
