@@ -632,15 +632,15 @@ body {
 }
 
 .preview-brand h2 {
-  font-size: 26px;
+  font-size: 32px;
   font-weight: 800;
   color: var(--primary);
   letter-spacing: -0.8px;
-  margin-bottom: 3px;
+  margin-bottom: 4px;
 }
 
 .preview-brand p {
-  font-size: 11px;
+  font-size: 13px;
   color: var(--text-muted);
   line-height: 1.8;
 }
@@ -650,15 +650,15 @@ body {
 }
 
 .preview-invoice-meta h3 {
-  font-size: 30px;
+  font-size: 36px;
   font-weight: 800;
   color: var(--text);
   letter-spacing: -0.8px;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .preview-invoice-meta p {
-  font-size: 11px;
+  font-size: 13px;
   color: var(--text-muted);
   line-height: 1.8;
 }
@@ -680,23 +680,23 @@ body {
 }
 
 .preview-parties h4 {
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1.2px;
   color: var(--text-muted);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .preview-parties .name {
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 700;
   color: var(--text);
-  margin-bottom: 3px;
+  margin-bottom: 4px;
 }
 
 .preview-parties .detail {
-  font-size: 11px;
+  font-size: 13px;
   color: var(--text-muted);
   line-height: 1.7;
 }
@@ -708,20 +708,20 @@ body {
 }
 
 .preview-items-table th {
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--text-muted);
   text-align: left;
-  padding: 11px 14px;
+  padding: 14px 16px;
   border-bottom: 2px solid var(--border);
   background: #f8fafc;
 }
 
 .preview-items-table td {
-  font-size: 12.5px;
-  padding: 11px 14px;
+  font-size: 15px;
+  padding: 14px 16px;
   border-bottom: 1px solid var(--border-light);
 }
 
@@ -742,8 +742,8 @@ body {
 .preview-total-row {
   display: flex;
   justify-content: space-between;
-  padding: 5px 14px;
-  font-size: 12.5px;
+  padding: 6px 16px;
+  font-size: 14px;
 }
 
 .preview-total-row .label {
@@ -756,18 +756,18 @@ body {
 
 .preview-total-row.total {
   border-top: 2px solid var(--text);
-  margin-top: 5px;
-  padding-top: 9px;
+  margin-top: 6px;
+  padding-top: 10px;
 }
 
 .preview-total-row.total .label {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 800;
   color: var(--text);
 }
 
 .preview-total-row.total .amount {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 800;
   color: var(--primary);
 }
@@ -776,18 +776,18 @@ body {
   margin-top: 36px;
   padding-top: 20px;
   border-top: 1px solid var(--border);
-  font-size: 11px;
+  font-size: 13px;
   color: var(--text-muted);
   line-height: 1.8;
 }
 
 .preview-footer strong {
   color: var(--text);
-  font-size: 9px;
+  font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.7px;
   display: block;
-  margin-bottom: 3px;
+  margin-bottom: 4px;
 }
 
 .preview-empty {

@@ -246,11 +246,6 @@ function exportPDF() {
   btn.disabled = true;
   btn.textContent = 'Generating PDF...';
 
-  const element = document.getElementById('invoicePreview');
-  const parent = element.closest('.preview-section');
-  const parentPos = parent.style.position;
-  parent.style.position = 'static';
-
   const h2c = window.html2canvas;
   const jsPDF = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF || null;
 
@@ -258,52 +253,65 @@ function exportPDF() {
     btn.disabled = false;
     btn.textContent = '↓ Export PDF';
     showToast('PDF library not loaded. Refresh page.', false);
-    parent.style.position = parentPos;
     return;
   }
 
-  h2c(element, {
-    scale: 2,
-    useCORS: true,
-    allowTaint: true,
-    letterRendering: true,
-    background: '#ffffff',
-    logging: false,
-  }).then((canvas) => {
-    parent.style.position = parentPos;
-    const imgData = canvas.toDataURL('image/jpeg', 0.95);
-    const pdf = new jsPDF('p', 'mm', 'a4');
-    const pdfW = pdf.internal.pageSize.getWidth();
-    const margin = 10;
-    const usableW = pdfW - margin * 2;
-    const imgH = (canvas.height / canvas.width) * usableW;
-    const pageH = pdf.internal.pageSize.getHeight() - margin * 2;
+  const original = document.getElementById('invoicePreview');
+  const clone = original.cloneNode(true);
+  clone.style.position = 'fixed';
+  clone.style.top = '0';
+  clone.style.left = '0';
+  clone.style.width = '794px';
+  clone.style.background = '#ffffff';
+  clone.style.zIndex = '9999';
+  clone.style.pointerEvents = 'none';
+  document.body.appendChild(clone);
 
-    let heightLeft = imgH;
-    let position = 0;
+  setTimeout(() => {
+    h2c(clone, {
+      scale: 2,
+      useCORS: true,
+      allowTaint: true,
+      letterRendering: true,
+      background: '#ffffff',
+      width: clone.scrollWidth,
+      height: clone.scrollHeight,
+    }).then((canvas) => {
+      document.body.removeChild(clone);
+      const imgData = canvas.toDataURL('image/jpeg', 0.95);
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const pdfW = pdf.internal.pageSize.getWidth();
+      const margin = 8;
+      const usableW = pdfW - margin * 2;
+      const imgH = (canvas.height / canvas.width) * usableW;
+      const pageH = pdf.internal.pageSize.getHeight() - margin * 2;
 
-    pdf.addImage(imgData, 'JPEG', margin, margin + position, usableW, imgH);
-    heightLeft -= pageH;
+      let heightLeft = imgH;
+      let position = 0;
 
-    while (heightLeft > 0) {
-      position -= pageH;
-      pdf.addPage();
       pdf.addImage(imgData, 'JPEG', margin, margin + position, usableW, imgH);
       heightLeft -= pageH;
-    }
 
-    pdf.save(`${data.invoiceNumber || 'invoice'}.pdf`);
-    btn.disabled = false;
-    btn.textContent = '↓ Export PDF';
-    showToast('PDF exported successfully!', true);
-  }).catch((err) => {
-    console.error('html2canvas error:', err);
-    parent.style.position = parentPos;
-    btn.disabled = false;
-    btn.textContent = '↓ Export PDF';
-    showToast('PDF export failed. Check console.', false);
-    alert('PDF Error: ' + err.message);
-  });
+      while (heightLeft > 0) {
+        position -= pageH;
+        pdf.addPage();
+        pdf.addImage(imgData, 'JPEG', margin, margin + position, usableW, imgH);
+        heightLeft -= pageH;
+      }
+
+      pdf.save(`${data.invoiceNumber || 'invoice'}.pdf`);
+      btn.disabled = false;
+      btn.textContent = '↓ Export PDF';
+      showToast('PDF exported successfully!', true);
+    }).catch((err) => {
+      console.error('html2canvas error:', err);
+      if (clone.parentNode) document.body.removeChild(clone);
+      btn.disabled = false;
+      btn.textContent = '↓ Export PDF';
+      showToast('PDF export failed. Check console.', false);
+      alert('PDF Error: ' + err.message);
+    });
+  }, 400);
 }
 
 function clearForm() {
