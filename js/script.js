@@ -245,16 +245,28 @@ function exportPDF() {
   btn.disabled = true;
   btn.textContent = 'Generating PDF...';
 
-  const element = document.getElementById('invoicePreview');
+  const original = document.getElementById('invoicePreview');
+  const clone = original.cloneNode(true);
+  clone.style.position = 'fixed';
+  clone.style.left = '-9999px';
+  clone.style.top = '0';
+  clone.style.width = '800px';
+  clone.style.background = '#ffffff';
+  clone.style.zIndex = '-1';
+  document.body.appendChild(clone);
 
   const opt = {
-    margin: [0.5, 0.5, 0.5, 0.5],
+    margin: 0.5,
     filename: `${data.invoiceNumber || 'invoice'}.pdf`,
     image: { type: 'jpeg', quality: 0.98 },
     html2canvas: {
       scale: 2,
       useCORS: true,
+      allowTaint: true,
       letterRendering: true,
+      background: '#ffffff',
+      width: clone.scrollWidth,
+      height: clone.scrollHeight,
     },
     jsPDF: {
       unit: 'in',
@@ -263,13 +275,15 @@ function exportPDF() {
     },
   };
 
-  html2pdf().set(opt).from(element).save().then(() => {
+  html2pdf().set(opt).from(clone).save().then(() => {
+    document.body.removeChild(clone);
     btn.disabled = false;
-    btn.innerHTML = '↓ Export PDF';
+    btn.textContent = '↓ Export PDF';
     showToast('PDF exported successfully!', true);
   }).catch(() => {
+    document.body.removeChild(clone);
     btn.disabled = false;
-    btn.innerHTML = '↓ Export PDF';
+    btn.textContent = '↓ Export PDF';
     showToast('PDF export failed. Try again.', false);
   });
 }
