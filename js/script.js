@@ -249,44 +249,54 @@ function exportPDF() {
   const original = document.getElementById('invoicePreview');
   const clone = original.cloneNode(true);
   clone.style.position = 'fixed';
-  clone.style.left = '-9999px';
   clone.style.top = '0';
+  clone.style.left = '0';
   clone.style.width = '800px';
   clone.style.background = '#ffffff';
-  clone.style.zIndex = '-1';
+  clone.style.zIndex = '9999';
+  clone.style.opacity = '0';
+  clone.style.pointerEvents = 'none';
   document.body.appendChild(clone);
 
+  const width = clone.scrollWidth;
+  const height = clone.scrollHeight;
+
   const opt = {
-    margin: 0.5,
+    margin: 0,
     filename: `${data.invoiceNumber || 'invoice'}.pdf`,
-    image: { type: 'jpeg', quality: 0.98 },
+    image: { type: 'jpeg', quality: 0.95 },
     html2canvas: {
       scale: 2,
       useCORS: true,
       allowTaint: true,
       letterRendering: true,
       background: '#ffffff',
-      width: clone.scrollWidth,
-      height: clone.scrollHeight,
+      width: width,
+      height: height,
+      windowWidth: width,
+      logging: false,
     },
     jsPDF: {
-      unit: 'in',
-      format: 'letter',
-      orientation: 'portrait',
+      unit: 'px',
+      format: [width * 2, height * 2],
+      orientation: width > height ? 'landscape' : 'portrait',
     },
   };
 
-  html2pdf().set(opt).from(clone).save().then(() => {
-    document.body.removeChild(clone);
-    btn.disabled = false;
-    btn.textContent = '↓ Export PDF';
-    showToast('PDF exported successfully!', true);
-  }).catch(() => {
-    document.body.removeChild(clone);
-    btn.disabled = false;
-    btn.textContent = '↓ Export PDF';
-    showToast('PDF export failed. Try again.', false);
-  });
+  setTimeout(() => {
+    html2pdf().set(opt).from(clone).save().then(() => {
+      document.body.removeChild(clone);
+      btn.disabled = false;
+      btn.textContent = '↓ Export PDF';
+      showToast('PDF exported successfully!', true);
+    }).catch((err) => {
+      console.error(err);
+      document.body.removeChild(clone);
+      btn.disabled = false;
+      btn.textContent = '↓ Export PDF';
+      showToast('PDF export failed. Try again.', false);
+    });
+  }, 300);
 }
 
 function clearForm() {
