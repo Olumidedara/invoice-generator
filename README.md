@@ -11,17 +11,15 @@
 
   <br/>
 
-  <a href="https://invoice-generator-kohl.vercel.app"><strong>🌐 Live Demo</strong></a>
-  &nbsp;·&nbsp;
   <a href="#✨-features"><strong>Features</strong></a>
   &nbsp;·&nbsp;
-  <a href="#🚀-deploy-your-own"><strong>Deploy</strong></a>
-  &nbsp;·&nbsp;
   <a href="#🛠️-tech-stack"><strong>Stack</strong></a>
+  &nbsp;·&nbsp;
+  <a href="#📁-project-structure"><strong>Structure</strong></a>
 
   <br/><br/>
 
-  <img src="https://via.placeholder.com/900x520/4f46e5/ffffff?text=MyInvoice+Preview" alt="MyInvoice Screenshot" width="90%" style="border-radius: 16px; box-shadow: 0 12px 40px rgba(0,0,0,0.15);">
+  <img src="assets/images/screenshot-main.png" alt="MyInvoice Screenshot" width="90%" style="border-radius: 16px; box-shadow: 0 12px 40px rgba(0,0,0,0.15);">
 
   <br/><br/>
 </div>
@@ -48,8 +46,8 @@
 <div align="center">
   <table>
     <tr>
-      <td><img src="https://via.placeholder.com/420x320/4f46e5/ffffff?text=Invoice+Form" alt="Form" width="100%"></td>
-      <td><img src="https://via.placeholder.com/420x320/3730a3/ffffff?text=Live+Preview" alt="Preview" width="100%"></td>
+      <td><img src="assets/images/screenshot-form.png" alt="Form" width="100%"></td>
+      <td><img src="assets/images/screenshot-preview.png" alt="Preview" width="100%"></td>
     </tr>
     <tr align="center">
       <td><em>Side-by-side form layout</em></td>
@@ -80,12 +78,17 @@ No data leaves your browser. No API calls. No sign-ups.
 ## 📁 Project Structure
 
 ```
-├── index.html          # Main HTML — form + preview layout
+├── index.html              # Main HTML — form + preview layout
 ├── css/
-│   └── style.css       # All styling — design system, layout, responsiveness
+│   └── style.css           # All styling — design system, layout, responsiveness
 ├── js/
-│   └── script.js       # App logic — CRUD items, calculations, PDF export
-└── README.md           # This file
+│   └── script.js           # App logic — CRUD items, calculations, PDF export
+├── assets/
+│   └── images/
+│       ├── screenshot-main.png
+│       ├── screenshot-form.png
+│       └── screenshot-preview.png
+└── README.md               # This file
 ```
 
 ## 🤝 Contributing
