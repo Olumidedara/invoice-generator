@@ -6,7 +6,7 @@
   <br/><br/>
 
   <h1>📄 MyInvoice</h1>
-  <h3>Create, preview, and export professional invoices — instantly.</h3>
+  <h3>Create, preview, and export professional invoices instantly.</h3>
   <p><i>A beautifully designed, no-dependency invoice generator that runs entirely in your browser.</i></p>
 
   <br/>
@@ -93,7 +93,7 @@ No data leaves your browser. No API calls. No sign-ups.
 
 ## 🤝 Contributing
 
-Found a bug or have an idea? Open an [issue](https://github.com/Olumidedara/invoice-generator/issues) or submit a PR — contributions are welcome!
+Found a bug or have an idea? Open an [issue](https://github.com/Olumidedara/invoice-generator/issues) or submit a PR. Contributions are welcome!
 
 ## 📄 License
 
