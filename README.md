@@ -11,11 +11,11 @@
 
   <br/>
 
-  <a href="#features"><strong>Features</strong></a>
+  <a href="#-features"><strong>Features</strong></a>
   &nbsp;·&nbsp;
-  <a href="#tech-stack"><strong>Stack</strong></a>
+  <a href="#%EF%B8%8F-tech-stack"><strong>Stack</strong></a>
   &nbsp;·&nbsp;
-  <a href="#project-structure"><strong>Structure</strong></a>
+  <a href="#-project-structure"><strong>Structure</strong></a>
 
   <br/><br/>
 
