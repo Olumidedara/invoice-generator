@@ -246,57 +246,64 @@ function exportPDF() {
   btn.disabled = true;
   btn.textContent = 'Generating PDF...';
 
-  const original = document.getElementById('invoicePreview');
-  const clone = original.cloneNode(true);
-  clone.style.position = 'fixed';
-  clone.style.top = '0';
-  clone.style.left = '0';
-  clone.style.width = '800px';
-  clone.style.background = '#ffffff';
-  clone.style.zIndex = '9999';
-  clone.style.opacity = '0';
-  clone.style.pointerEvents = 'none';
-  document.body.appendChild(clone);
+  const element = document.getElementById('invoicePreview');
+  const parent = element.closest('.preview-section');
+  const parentPos = parent.style.position;
+  parent.style.position = 'static';
 
-  const width = clone.scrollWidth;
-  const height = clone.scrollHeight;
+  const h2c = window.html2canvas;
+  const jsPDF = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF || null;
 
-  const opt = {
-    margin: 0,
-    filename: `${data.invoiceNumber || 'invoice'}.pdf`,
-    image: { type: 'jpeg', quality: 0.95 },
-    html2canvas: {
-      scale: 2,
-      useCORS: true,
-      allowTaint: true,
-      letterRendering: true,
-      background: '#ffffff',
-      width: width,
-      height: height,
-      windowWidth: width,
-      logging: false,
-    },
-    jsPDF: {
-      unit: 'px',
-      format: [width * 2, height * 2],
-      orientation: width > height ? 'landscape' : 'portrait',
-    },
-  };
+  if (!h2c || !jsPDF) {
+    btn.disabled = false;
+    btn.textContent = '↓ Export PDF';
+    showToast('PDF library not loaded. Refresh page.', false);
+    parent.style.position = parentPos;
+    return;
+  }
 
-  setTimeout(() => {
-    html2pdf().set(opt).from(clone).save().then(() => {
-      document.body.removeChild(clone);
-      btn.disabled = false;
-      btn.textContent = '↓ Export PDF';
-      showToast('PDF exported successfully!', true);
-    }).catch((err) => {
-      console.error(err);
-      document.body.removeChild(clone);
-      btn.disabled = false;
-      btn.textContent = '↓ Export PDF';
-      showToast('PDF export failed. Try again.', false);
-    });
-  }, 300);
+  h2c(element, {
+    scale: 2,
+    useCORS: true,
+    allowTaint: true,
+    letterRendering: true,
+    background: '#ffffff',
+    logging: false,
+  }).then((canvas) => {
+    parent.style.position = parentPos;
+    const imgData = canvas.toDataURL('image/jpeg', 0.95);
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pdfW = pdf.internal.pageSize.getWidth();
+    const margin = 10;
+    const usableW = pdfW - margin * 2;
+    const imgH = (canvas.height / canvas.width) * usableW;
+    const pageH = pdf.internal.pageSize.getHeight() - margin * 2;
+
+    let heightLeft = imgH;
+    let position = 0;
+
+    pdf.addImage(imgData, 'JPEG', margin, margin + position, usableW, imgH);
+    heightLeft -= pageH;
+
+    while (heightLeft > 0) {
+      position -= pageH;
+      pdf.addPage();
+      pdf.addImage(imgData, 'JPEG', margin, margin + position, usableW, imgH);
+      heightLeft -= pageH;
+    }
+
+    pdf.save(`${data.invoiceNumber || 'invoice'}.pdf`);
+    btn.disabled = false;
+    btn.textContent = '↓ Export PDF';
+    showToast('PDF exported successfully!', true);
+  }).catch((err) => {
+    console.error('html2canvas error:', err);
+    parent.style.position = parentPos;
+    btn.disabled = false;
+    btn.textContent = '↓ Export PDF';
+    showToast('PDF export failed. Check console.', false);
+    alert('PDF Error: ' + err.message);
+  });
 }
 
 function clearForm() {
